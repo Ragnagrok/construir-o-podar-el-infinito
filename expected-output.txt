@@ -1,0 +1,28 @@
+
+Two ways to get to two
+  two == two'                       True
+  take 5 evens == take 5 evens'     True
+  two `lessThan` infinity           True
+
+The space, and what the types prune before looking
+  10525 expressions up to size 5; 1150 of them are Int -> Bool programs
+
+The vibecoding filter: it looks right on what I tried
+  tried 0..2:  not (x == 1)                      wrong at x = 3
+  tried 0..3:  0 == x `mod` 2                    correct up to 100000
+  tried 0..4:  0 == x `mod` 2                    correct up to 100000
+  tried 0..5:  0 == x `mod` 2                    correct up to 100000
+  tried 0..7:  0 == x `mod` 2                    correct up to 100000
+
+The spec as a filter: head . filter meetsSpec $ samples llm prompt
+  0 == x `mod` 2                    correct up to 100000
+
+A different model (random, seed 7), both filters
+  tried 0..2:  not (not (not (x == 1)))          wrong at x = 3
+  spec:        0 == x `mod` 2                    correct up to 100000
+
+The ratchet: each check only removes candidates
+  869285 candidates up to size 7
+  33250 typecheck
+  194 also pass 0, 1, 2; 78 of them are wrong
+  116 also satisfy the properties; 0 of them are wrong
